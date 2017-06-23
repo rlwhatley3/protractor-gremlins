@@ -84,7 +84,8 @@ define(function(require) {
               var event = {
                 fps: fps,
                 type: 'fps',
-                species: 'mogwai'
+                species: 'mogwai',
+                timestamp: new Date().getTime()
               };
               config.logger[level](event);
             }

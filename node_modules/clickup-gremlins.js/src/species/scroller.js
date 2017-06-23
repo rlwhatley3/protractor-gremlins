@@ -103,7 +103,8 @@ define(function(require) {
                 type: 'scroller',
                 action: 'scrollTo',
                 posX: scrollX,
-                posY: scrollY
+                posY: scrollY,
+                timestamp: new Date().getTime()
               };
               config.logger.log(event);
             }

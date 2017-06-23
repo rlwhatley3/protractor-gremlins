@@ -139,7 +139,8 @@ define(function(require) {
                   action: clickType,
                   element: targetElement,
                   posX: posX,
-                  posY: posY
+                  posY: posY,
+                  timestamp: new Date().getTime()
                 };
                 config.logger.log(event);
             }

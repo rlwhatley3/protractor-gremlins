@@ -120,7 +120,8 @@ define(function(require) {
                 type: 'formFiller',
                 action: 'input',
                 value: value,
-                element: element
+                element: element,
+                timestamp: new Date().getTime()
               };
               config.logger.log(event);
             }

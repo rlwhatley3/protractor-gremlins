@@ -118,7 +118,8 @@ define(function(require) {
                 value: String.fromCharCode(key),
                 element: targetElement,
                 posX: posX,
-                posY: posY
+                posY: posY,
+                timestamp: new Date().getTime()
               };
               config.logger.log(event);
             }

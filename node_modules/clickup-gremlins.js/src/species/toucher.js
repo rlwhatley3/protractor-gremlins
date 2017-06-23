@@ -319,7 +319,8 @@ define(function(require) {
                     element: targetElement,
                     posX: posX,
                     posY: posY,
-                    details: details
+                    details: details,
+                    timestamp: new Date().getTime()
                   };
                   config.logger.log(event);
                 }

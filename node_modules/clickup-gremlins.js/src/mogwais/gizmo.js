@@ -52,8 +52,9 @@ define(function(require) {
                       var event = {
                         type: 'gizmo',
                         species: 'mogwai',
-                        errorCount: config.maxErrors,
-                        action: 'test execution halted'
+                        errorCount: nbErrors,
+                        action: 'test execution halted',
+                        timestamp: new Date().getTime()
                       };
                       config.logger.warn(event);
                     }, 4);

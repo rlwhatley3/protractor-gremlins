@@ -75,7 +75,8 @@ define(function(require) {
                     message: msg,
                     type: 'alert',
                     action: 'alert',
-                    species: 'mogwai'
+                    species: 'mogwai',
+                    timestamp: new Date().getTime()
                   };
                   config.logger.warn(event);
                 };
@@ -87,7 +88,8 @@ define(function(require) {
                     message: msg,
                     type: 'confirm',
                     action: 'alert',
-                    species: 'mogwai'
+                    species: 'mogwai',
+                    timestamp: new Date().getTime()
                   };
                   config.logger.warn(event);
                 };
@@ -99,7 +101,8 @@ define(function(require) {
                     message: msg,
                     type: 'prompt',
                     action: 'alert',
-                    species: 'mogwai'
+                    species: 'mogwai',
+                    timestamp: new Date().getTime()
                   };
                   config.logger.warn(event);
                 };

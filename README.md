@@ -5,10 +5,8 @@ Protractor plugin for automating with [clickup-gremlins](https://github.com/rlwh
 ## Provides
 
   - An interface for interacting with [clickup-gremlins](https://github.com/rlwhatley3/gremlins.js "Clickup Gremlins") through Protractors browser object
-  
-  - Log aggregation of Gremlins logs into localStorage
-  
-  - Custom matcher for Gremlin error checking
+
+  - Custom matcher for Gremlin error checking
     - toHaveGremlinErrors
   
   - Injection of Gremlins on test run, no need to include the gremlins in a script on your html

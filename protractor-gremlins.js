@@ -58,7 +58,9 @@ Gremlins = {
         });
       },
       unleash: (config = {}, hordeConfig = {}) => {
+        browser.Gremlins.init();
         config = JSON.stringify(config);
+        let excludedErrors = hordeConfig.excludeErrors || [];
         browser.executeScript(`javascript:
           window.gremlinsFinished = false;
           window.gremlins && window.gremlins.createHorde()
@@ -70,13 +72,44 @@ Gremlins = {
         return browser.driver.wait(() => {
           return browser.executeScript(() => {
             return window.gremlinsFinished;
-          })
+          });
+        }).then(finished => {
+          let ret = {
+            browserLogs: [],
+            gremlinLogs: {},
+            gremlinErrors: []
+          };
+
+          return browser.manage().logs().get('browser').then(browserLog => {
+            ret.browserLogs = browserLog.sort((entry1, entry2) => entry1.timestamp - entry2.timestamp);
+            return browser.Gremlins.getLogs().then(gremlinLogs => {
+              ret.gremlinLogs = gremlinLogs;
+              for(let key in ret.gremlinLogs) {
+                ret.gremlinLogs[key].sort((e1, e2) => e1.timestamp - e2.timestamp);
+              }
+              ret.browserLogs.filter( entry => entry.level.name_ === 'SEVERE' && !excludedErrors.some(errorString => entry.message.includes(errorString)) ).forEach(browserLog => {
+                let timeIndex = (ret.gremlinLogs.log.findIndex(lg => lg.timestamp > browserLog.timestamp) );
+                let startIndex = timeIndex - 11;
+                if(startIndex < 0) { startIndex = 0; }
+                let previousActions = ret.gremlinLogs.log.slice(startIndex, timeIndex);
+                let err = {
+                  message: browserLog.message,
+                  timestamp: browserLog.timestamp,
+                  previousActions: previousActions,
+                  lastAction: previousActions[ previousActions.length - 1 ]
+                }
+                ret.gremlinErrors.push(err);
+              });
+              return ret;
+            });
+          });
+          // return ret;
         });
       },
       getLogs: () => {
         return browser.executeScript(() => {
           return JSON.parse(window.localStorage.getItem('gremlinLogs'));
-        })
+        });
       },
       resetLogs: () => {
         return browser.executeScript(() => {
@@ -117,7 +150,7 @@ Gremlins = {
           }
         }
       }
-      jasmine.addMatchers(matchers);
+      jasmine && jasmine.addMatchers(matchers)
     });
 	},
   onPageLoad: (browser) => {

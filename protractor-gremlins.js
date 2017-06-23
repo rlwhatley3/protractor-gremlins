@@ -6,18 +6,20 @@ Gremlins = {
 	onPrepare: () => {
 		browser.Gremlins = {
 			init: () => {
-				browser.hasGremlins = true;
-				return browser.executeScript(() => {
-					let script = document.createElement('script');
-					window.gremlinsFinished = false;
-          let gremlinLogs = {
-	          log: [],
-	          info: [],
-	          warn: [],
-	          error: []
-	        };
+        browser.hasGremlins = true;
+        return browser.executeScript(() => {
+          let script = document.createElement('script');
 
-	        window.localStorage.setItem('gremlinLogs', JSON.stringify(gremlinLogs));
+          window.gremlinsFinished = false;
+
+          let gremlinLogs = {
+            log: [],
+            info: [],
+            warn: [],
+            error: []
+          };
+
+          window.localStorage.setItem('gremlinLogs', JSON.stringify(gremlinLogs));
 
           class Logg {
             constructor(key) {
@@ -53,12 +55,16 @@ Gremlins = {
           script.src = "/node_modules/clickup-gremlins.js/gremlins.min.js";
           document.body.appendChild(script);
 
-				});
-			},
-      unleash: (config = {}) => {
+        });
+      },
+      unleash: (config = {}, hordeConfig = {}) => {
+        if (browser.allScriptsTimeout < (130 * 1000)) {
+          return throw(`Unleashing Gremlins requires an allScriptsTimeout >= 130 seconds, but current protractor.conf is only ${browser.allScriptsTimeout/1000} seconds`)
+          // return fail(`Unleashing Gremlins requires an allScriptsTimeout >= 130 seconds, but current protractor.conf is only ${browser.allScriptsTimeout/1000} seconds`);
+        }
         config = JSON.stringify(config);
         browser.executeScript(`javascript:
-        	window.gremlinsFinished = false;
+          window.gremlinsFinished = false;
           window.gremlins && window.gremlins.createHorde()
                               .logger(window.GremlinsLogger)
                               .unleash(${config}, function() {

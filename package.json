@@ -9,6 +9,6 @@
   "author": "Clickup.com",
   "license": "MIT",
   "dependencies": {
-    "clickup-gremlins.js": "^0.1.0"
+    "clickup-gremlins.js": "latest"
   }
 }

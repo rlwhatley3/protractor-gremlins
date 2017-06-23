@@ -9,6 +9,7 @@ Protractor plugin for automating with [clickup-gremlins](https://github.com/rlwh
   - Log aggregation of Gremlins logs into localStorage
   
   - Custom matcher for Gremlin error checking
+    - toHaveGremlinErrors
   
   - Injection of Gremlins on test run, no need to include the gremlins in a script on your html
 

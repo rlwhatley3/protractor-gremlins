@@ -1,5 +1,5 @@
 {
-  "name": "protractor-gremlins",
+  "name": "protractor-gremlins-plugin",
   "version": "1.0.0",
   "description": "",
   "main": "protractor-gremlins.js",

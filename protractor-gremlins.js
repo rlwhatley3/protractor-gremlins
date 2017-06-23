@@ -58,6 +58,7 @@ Gremlins = {
       unleash: (config = {}) => {
         config = JSON.stringify(config);
         browser.executeScript(`javascript:
+        	window.gremlinsFinished = false;
           window.gremlins && window.gremlins.createHorde()
                               .logger(window.GremlinsLogger)
                               .unleash(${config}, function() {
@@ -115,7 +116,6 @@ Gremlins = {
         }
       }
       jasmine.addMatchers(matchers);
-      
     });
 	},
   onPageLoad: (browser) => {

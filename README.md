@@ -14,7 +14,7 @@ Protractor plugin for automating with [clickup-gremlins](https://github.com/rlwh
 
 ## Installation
 ```
-  npm install protractor-gremlins --save-dev
+  npm install protractor-gremlins-plugin --save-dev
 ```
 ### Setup
 
@@ -22,7 +22,7 @@ Add the protractor-gremlins package into the protractor.conf exported config
 ```
   plugins: [
     {
-      package: 'protractor-gremlins'
+      package: 'protractor-gremlins-plugin'
     }
   ],
 

@@ -40,19 +40,9 @@ The Gremlins object is available on Protractors browser object. All methods retu
 ```
 let gremlins = browser.Gremlins;
 
-gremlins.unleash().then(finished => {
-  gremlins.getLogs().then(gremlinLogs => {
-    // do some stuff with the logs
-  });
+gremlins.unleash().then(history => {
+  // history provides browserLogs and gremlinLogs, both ordered by timestamp
+  // history.gremlinErrors provides a correlation of 'SEVERE' level browserlogs with the 10 previous gremlins actions
 });
 
-```
-Be sure to reset the logs if you want to run multiple tests
-
-```
-afterAll((done) => {
-  signupPage.resetGremlinLogs().then(() => {
-    done();
-  });
-});
 ```

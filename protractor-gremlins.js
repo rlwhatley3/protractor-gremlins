@@ -58,10 +58,6 @@ Gremlins = {
         });
       },
       unleash: (config = {}, hordeConfig = {}) => {
-        if (browser.allScriptsTimeout < (130 * 1000)) {
-          return throw(`Unleashing Gremlins requires an allScriptsTimeout >= 130 seconds, but current protractor.conf is only ${browser.allScriptsTimeout/1000} seconds`)
-          // return fail(`Unleashing Gremlins requires an allScriptsTimeout >= 130 seconds, but current protractor.conf is only ${browser.allScriptsTimeout/1000} seconds`);
-        }
         config = JSON.stringify(config);
         browser.executeScript(`javascript:
           window.gremlinsFinished = false;
